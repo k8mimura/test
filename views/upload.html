@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+
+        // ファイルアップロード
+        function doUploadFile() {
+            document.uploadform.action = "/uploadFile";
+            document.uploadform.method = "post";
+            document.uploadform.enctype = "multipart/form-data";
+            document.uploadform.submit();
+        };
+
+        // 検索ボタンを押す
+        function doUpload() {
+            // アップロードファイル名の取得
+            var filepath = document.getElementById('file').value;
+            var split = filepath.split('\\');
+            if (filepath.match('/')) {  // フォルダ間の分割符
+                split = filepath.split('/');
+            }
+            var filename = split[split.length - 1];
+            document.getElementById('uploadFileName').value = filename;
+            document.uploadform.action = "/doUpload";
+            document.uploadform.method = "post";
+            document.uploadform.enctype = "";
+            document.uploadform.submit();
+        };
+    </script>
+    <link rel="stylesheet" href="/css/base.css">
+    <title>アパレル情報共有システム　ファイルアップロード</title>
+</head>
+
+<body>
+    <center>
+        <div class="common">
+            <form name="uploadform">
+                <div align="center">
+                    <br>
+                    <h1>アパレル情報共有システム　ファイルアップロード</h1>
+                </div>
+                <br>
+                <div align="center">
+                    <label for="file" name="uploadFileLabel" id="uploadFileLabel"
+                        class="filelabel">アップロードファイルフォルダ指定</label>
+                    <input type="file" name="uploadFile" id="file" class="fileinput" onchange="doUploadFile()">
+                </div>
+                <br><br>
+                <div align="center">
+                    <input type="button" class="return" onclick="location.href='/goback'" value="戻る">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" class="upload_submit" value="実行" onclick="doUpload()">
+                    <input type="hidden" name="uploadFileName" id="uploadFileName" value="">
+                </div>
+                <div align="center">
+                    <label id="msg" class="error">
+                        <%=msg%>
+                    </label>
+                </div>
+
+                <br><br><br>
+                <footer>
+                    <div align="left">
+                        <p>
+                            <small>※ファイル名は、データ名+_YYYYMMDD.csv、にしてください。（例：SHOHINMASTER_20220801.csv）</small>
+                            <br><small>※ブラウザを閉じる×とログアウトになります</small>
+                        </p>
+                    </div>
+                </footer>
+            </form>
+        </div>
+    </center>
+</body>
+
+</html>

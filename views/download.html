@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/base.css">
+    <title>アパレル情報共有システム　検索・ダウンロード</title>
+    <script>
+        // 検索ボタンを押す
+        function search() {
+            document.getElementById("index").value = 1;
+            document.downloadform.action = "/doSearch";
+            document.downloadform.method = "post";
+            document.downloadform.submit();
+        }
+
+        // ダウンロードボタンを押す
+        function download() {
+            // location.href = 'downloadUrl';
+            // document.getElementById('msg').innerText = "downloadMsg";
+            // document.getElementById("msg").style.color = "red";
+            var downloadflg = document.getElementById('downloadFlag').value;
+            if (downloadflg == 1) {
+                document.downloadform.action = "/download";
+                document.downloadform.method = "post";
+                document.downloadform.submit();
+                document.getElementById('msg').innerText = "<%=downloadMsg%>";
+                document.getElementById("msg").style.color = "red";
+            }
+        }
+
+        // ページのインデックスを押す
+        function pagemove(e) {
+            document.getElementById("index").value = e.id;
+            document.downloadform.action = "/doSearch";
+            document.downloadform.method = "post";
+            document.downloadform.submit();
+        }
+    </script>
+</head>
+
+<center>
+    <div class="download">
+
+        <body>
+            <form name="downloadform">
+                <div align="center">
+                    <br>
+                    <h1>アパレル情報共有システム　検索・ダウンロード</h1>
+                </div>
+                <div align="center">
+                    <table align="center">
+                        <tr>
+                            <td align="left" class="searchText">検索条件：</td>
+                            <td align="right"><input type="button" class="return" onclick="location.href='/goback'"
+                                    value="戻る">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">発注番号</td>
+                            <td><input type="text" class="download_text" name="orderNo" value="<%=orderNo%>" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left">出荷日</td>
+                            <td><input type="text" class="download_text" name="nyukayoteibi"
+                                    value="<%=nyukayoteibi%>" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left">着日</td>
+                            <td><input type="text" class="download_text" name="tyakuyoteibi"
+                                    value="<%=tyakuyoteibi%>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">企業コード&nbsp;&nbsp;</td>
+                            <td><input type="text" class="download_text" name="kigyocode" value="<%=kigyocode%>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">商品コード&nbsp;&nbsp;</td>
+                            <td><input type="text" class="download_text" name="shohincode" value="<%=shohincode%>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">品番</td>
+                            <td><input type="text" class="download_text" name="hinban" value="<%=hinban%>" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left">店舗コード</td>
+                            <td><input type="text" class="download_text" name="tenpocode" value="<%=tenpocode%>" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left">出荷元</td>
+                            <td><input type="text" class="download_text" name="itakumotoshukkamoto"
+                                    value="<%=itakumotoshukkamoto%>" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left">納品先</td>
+                            <td><input type="text" class="download_text" name="deliveryAddress"
+                                    value="<%=deliveryAddress%>" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div align="center">
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <label id="msg" class="error">
+                                    <%=msg%>
+                                </label>
+                            </td>
+                            <td><input type="button" class="download_search" value="検索" onclick="search()"></td>
+                            <td><input type="button" class="download_download" value="ダウンロード" onclick="download()"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <% if (datalist.length>0) {%>
+                    <hr>
+                    <!--<div align="center" style="height:100px; width:1300px; overflow-y:scroll; overflow-x:scroll;">-->
+                    <div align="right">
+                        <table align="right">
+                            ＜
+                            <%for(let i=1; i<=page; i++){%>
+                                <a href="javascript:void(0)" onclick="pagemove(this)" id="<%=i%>">
+                                    <%=i%>
+                                </a>
+                                <%if(i<page){%>
+                                    &nbsp;
+                                    <%}%>
+                                        <%}%>
+                                            ＞
+                        </table>
+                    </div>
+
+                    <div align="center" style="height:390px; width:auto; overflow-y:scroll; overflow-x:scroll;">
+                        <!-- <table align="center" style="width:auto;"  border="1"> -->
+                        <table align="center">
+                            <tr>
+                                <td style="min-width:8em;">企業コード</td>
+                                <td style="min-width:8em;">品番</td>
+                                <td style="min-width:10em;">商品コード</td>
+                                <td style="min-width:3em;">カラー</td>
+                                <td style="min-width:3em;">サイズ</td>
+                                <td style="min-width:3em;">荷姿</td>
+                                <td style="min-width:10em;">店舗コード</td>
+                                <td style="min-width:10em;">SCMラベルNo</td>
+                                <td style="min-width:10em;">出荷依頼．数量</td>
+                                <td style="min-width:10em;">事前通知．数量</td>
+                                <td style="min-width:10em;">入庫予定．数量</td>
+                                <td style="min-width:10em;">入荷予定日</td>
+                                <td style="min-width:10em;">着予定日</td>
+                                <td style="min-width:10em;">分納１数量</td>
+                                <td style="min-width:10em;">分納１到着予定日</td>
+                                <td style="min-width:10em;">分納２数量</td>
+                                <td style="min-width:10em;">分納２到着予定日</td>
+                                <td style="min-width:10em;">分納３数量</td>
+                                <td style="min-width:10em;">分納３到着予定日</td>
+                                <td style="min-width:10em;">店舗名</td>
+                                <td style="min-width:10em;">エリア</td>
+                                <td style="min-width:10em;">エリアコード</td>
+                                <td style="min-width:10em;">郵便番号</td>
+                                <td style="min-width:10em;">住所</td>
+                            </tr>
+                            <tr>
+                                <td colspan="24">
+                                    <hr>
+                                </td>
+                            </tr>
+
+                            <%for(let i=0;i<datalist.length;i++){%>
+                                <tr>
+                                    <td>
+                                        <%=datalist[i].kigyocode%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].hinban%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].shohincode%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].color%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].size%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].nisugata%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].tenpocode%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].scmlaberu%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].dsuuryo%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].esuuryo%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].csuuryo%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].nyukayoteibi%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].tyakuyoteibi%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].bunnou1suuryo%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].bunnou1toutyakuyoteibi%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].bunnou2suuryo%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].bunnou2toutyakuyoteibi%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].bunnou3suuryo%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].bunnou3toutyakuyoteibi%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].tenpomei%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].area%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].areacode%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].yuubinbango%>
+                                    </td>
+                                    <td>
+                                        <%=datalist[i].juusho%>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </table>
+                    </div>
+                    <%}%>
+
+                        <input type="hidden" name="index" id="index" value="<%=currentPage%>">
+                        <input type="hidden" name="downloadFlag" id="downloadFlag" value="<%=downloadFlag%>">
+            </form>
+        </body>
+
+        <footer>
+            <div align="left">
+                <p>
+                    <br><small>※ブラウザを閉じる×とログアウトになります</small>
+                </p>
+            </div>
+        </footer>
+    </div>
+</center>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/base.css">
+    <title>アパレル情報共有システム　ログイン</title>
+</head>
+
+<body>
+    <form action="/doLogin" method="post">
+        <center>
+            <div class="common">
+                <div align="center">
+                    <br>
+                    <h1>アパレル情報共有システム　ログインＡ</h1>
+                </div>
+                <div align="center">
+                    <table align="center">
+                        <tr>
+                            <td align="left">ID：</td>
+                            <td><input type="text" name="username" value="<%=username%>" /></td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td align="left">PW：</td>
+                            <td><input type="password" name="password" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div align="center">
+                    <tr>
+                        <td><input type="submit" class="login" value="ログイン"></td>
+                    </tr>
+                </div>
+                <div align="center">
+                    <tr>
+                        <td>
+                            <label id="msg" class="error">
+                                <%=msg%>
+                            </label>
+                        </td>
+                    </tr>
+                </div>
+                <br>
+                <br>
+            </div>
+        </center>
+    </form>
+</body>
+
+</html>

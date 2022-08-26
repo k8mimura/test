@@ -1,0 +1,130 @@
+h5 {
+    color: red;
+}
+
+/* エラー情報 */
+label.error {
+    color: red;
+}
+
+/* 共通divサイズ*/
+div.common {
+    text-align: center;
+    border: ridge;
+    width: 800px;
+    background-color: #D7EEFF;
+}
+
+/* ダウンロード画面のdivサイズ*/
+div.download {
+    text-align: center;
+    border: ridge;
+    background-color: #D7EEFF;
+}
+
+/* 上部のCSS*/
+div.login_form_top {
+    text-align: center
+}
+
+/* ボタン部のCSS*/
+div.login_form_btm {
+    text-align: center
+}
+
+/* ログイン画面のログイン*/
+input.login {
+    width: 10em;
+    height: 2.5em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+/* メイン画面のアップデート*/
+input.main_upload {
+    width: 15em;
+    height: 3em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+/* メイン画面のダウンロード*/
+input.main_download {
+    width: 15em;
+    height: 4em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+/* ファイルアップロード画面のアップデート*/
+input.upload_upload {
+    width: 15em;
+    height: 3em;
+    background-color: whitesmoke;
+}
+
+/* 画面の戻る*/
+input.return {
+    width: 6em;
+    height: 2em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+/* ファイルアップロード画面の実行*/
+input.upload_submit {
+    width: 6em;
+    height: 2em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+/* ダウンロード画面の検索条件文言の色*/
+td.searchText {
+    color: chocolate;
+}
+
+/* ダウンロード画面のtext属性*/
+input.download_text {
+    width: 260px;
+    height: 18px;
+}
+
+/* 検索・ダウンロードロード画面の検索*/
+input.download_search {
+    width: 4em;
+    height: 2em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+/* 検索・ダウンロードロード画面のダウンロード*/
+input.download_download {
+    width: 9em;
+    height: 2em;
+    font-weight: 800;
+    background-color: whitesmoke;
+    border: 1px solid #333;
+}
+
+.filelabel {
+    display: inline-block;
+    position: relative;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.5s;
+    border: 1px solid #333;
+}
+
+.fileinput {
+    display: none;
+}

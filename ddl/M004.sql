@@ -1,0 +1,8 @@
+-- ロールマスタテーブル定義
+CREATE TABLE M004(
+    LOGINID CHARACTER VARYING(8),    -- ログインＩＤ
+    ROLE01 CHARACTER VARYING(250),   -- ロール１
+    ROLE02 CHARACTER VARYING(250),   -- ロール２
+    ROLE03 CHARACTER VARYING(250),   -- ロール３
+    PRIMARY KEY (LOGINID)
+);
